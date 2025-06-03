@@ -220,7 +220,7 @@ grid on
 
 sensor_data_modulated_filtered_2nd_gone = zeros(size(modulated_sensor_data));
 %for i = 1:size(sensor_data, 1)
-for i = 1:256
+for i = 1:1
     
     % For sensor, i, take the fft
     L = size(modulated_sensor_data(1,:), 2);
@@ -278,17 +278,24 @@ x_axis_mm = (-(Nx-1)*(dx/2):dx:(Nx-1)*(dx/2));
 z_axis_mm = (0:dy:(Ny-1)*dy);
 
 figure
-imagesc(x_axis_mm, z_axis_mm, abs(hilbert(img_recons_final)));
-title("Original Backprojection Sum");
+imagesc(x_axis_mm, z_axis_mm, abs(hilbert(img_recons_final_modulation)));
+title("Original Modulation Sum");
 xlabel('x [mm]');
 ylabel('z [mm]');
 
 
 figure
-imagesc(x_axis_mm, z_axis_mm, abs(hilbert(img_recons_final_modulation)));
-title("Pulse Inversion Modulation Backproj. Sum");
+imagesc(x_axis_mm, z_axis_mm, abs(hilbert(img_recons_final_summation)));
+title("Pulse Inversion Inversion Backproj. Sum");
 xlabel('x [mm]');
 ylabel('z [mm]');
 
 % % Hello
 
+% plot the wave as a function of the x-axis (slice x-wise)
+figure
+plot(1:256, img_recons_final_modulation(128,:));
+
+%Plot the the wave as a function of the z-axis (slice z-wise)
+figure
+plot(1:256, img_recons_final_modulation(:,128));
